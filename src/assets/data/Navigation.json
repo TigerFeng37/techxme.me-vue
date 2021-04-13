@@ -1,0 +1,20 @@
+[
+    {
+        "index": "1",
+        "title": "The Memes",
+        "href": "/",
+        "icon": "mdi-view-dashboard"
+    },
+    {
+        "index": "2",
+        "title": "Find Memes",
+        "href": "/",
+        "icon": "mdi-magnify"
+    },
+    {
+        "index": "3",
+        "title": "Upload Memes",
+        "href": "/",
+        "icon": "mdi-upload"
+    }
+]

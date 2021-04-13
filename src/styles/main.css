@@ -1,0 +1,33 @@
+@font-face {
+    font-family: Manrope;
+    src: url('../assets/fonts/Manrope-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: NeoX;
+    src: url('../assets/fonts/neoXbeta2.0GX.ttf');
+}
+
+h1, h2, h3 {
+    font-family: 'NeoX';
+    font-weight: 400;
+}
+
+h4, h5, h6, p, a {
+    font-family: 'Manrope';
+}
+
+.main-content-wrapper {
+    margin: 1em 2em;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.meme-card {
+}
+
+.dark-mode-btn {
+    height: 4em !important;
+    width: 4em !important;
+}

@@ -1,60 +1,95 @@
 <template>
   <v-app>
-    <v-app-bar
+    <v-toolbar
       app
       color="primary"
-      dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+      <div style="margin-top: .5em">
+        <h2>1</h2>
       </div>
 
       <v-spacer></v-spacer>
+      <div class="dark-mode-button-wrapper">
+        <v-tooltip v-if="!$vuetify.theme.dark" bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" color="#fff" small elevation="0" rounded @click="darkMode" class="dark-mode-btn">
+              <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
+            </v-btn>
+          </template>
+          <span>Dark Mode Off</span>
+        </v-tooltip>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-tooltip v-else bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" color="#222" small elevation="0" rounded @click="darkMode" class="dark-mode-btn">
+              <v-icon>mdi-white-balance-sunny</v-icon>
+            </v-btn>
+          </template>
+          <span>Dark Mode On</span>
+        </v-tooltip>
+      </div>
+    </v-toolbar>
+    <v-main >
+      <v-container fluid class="d-flex justify-content-between">
+        <v-navigation-drawer :v-model="null" height="90vh" color="primary">
+          <v-list
+            nav
+          >
+            <v-list-item link>
+              <v-list-item-content>
+                <v-list-item-title class="title">
+                  Guest
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  Login
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-divider></v-divider>
+            <v-list nav dense>
+              <v-list-item
+                v-for="item in Link"
+                :key="item.index"
+                link
+              >
+                <v-list-item-icon>
+                  <v-icon color="accent">{{ item.icon }}</v-icon>
+                </v-list-item-icon>
 
-    <v-main>
-      <HelloWorld/>
+                <v-list-item-content>
+                  <v-list-item-title style="margin-top: .25em">{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-list>
+        </v-navigation-drawer>
+        <MainView/>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import MainView from './components/MainView';
+import './styles/main.css';
+import Links from './assets/data/Navigation.json';
 
 export default {
   name: 'App',
+  methods: {
+    darkMode: function() {
+        this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+        localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
+  }},
 
   components: {
-    HelloWorld,
+    MainView,
   },
 
-  data: () => ({
-    //
-  }),
+  data () {
+    return {
+      Link: Links
+    }
+  },
 };
 </script>
